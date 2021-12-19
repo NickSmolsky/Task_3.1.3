@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public List<User> getAll() {
-        return userDao.getAll();
+        return userDao.findAll();
     }
 
     @Transactional
@@ -45,22 +45,28 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User selectById(long id) {
-        return userDao.selectById(id);
+        return userDao.findById(id);
     }
 
     @Transactional
     @Override
     public void update(User user, long id) {
         if (!user.getPassword().equals("")) {
-            userDao.selectById(id).setPassword(passwordEncoder.encode(user.getPassword()));
+            userDao.findById(id).setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        userDao.update(user, id);
+        User updateUser = userDao.findById(id);
+        updateUser.setUsername(user.getUsername());
+        updateUser.setLastName(user.getLastName());
+        updateUser.setAge(user.getAge());
+        updateUser.setEmail(user.getEmail());
+        updateUser.setRoles(user.getRoles());
+        userDao.save(updateUser);
     }
 
     @Transactional
     @Override
     public void delete(long id) {
-        userDao.delete(id);
+        userDao.deleteById(id);
     }
 
     @Transactional

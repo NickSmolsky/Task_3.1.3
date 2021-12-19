@@ -1,5 +1,6 @@
 package com.nicksmol.restexam.controller;
 
+
 import com.nicksmol.restexam.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,12 +19,12 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+
     }
 
     @GetMapping
     public String getUser(Principal principal, Model model) {
-        model.addAttribute("authUser", userService.findByEmail(principal.getName()));
+       model.addAttribute("authUser", userService.findByEmail(principal.getName()));
         return "userPage";
     }
-
 }

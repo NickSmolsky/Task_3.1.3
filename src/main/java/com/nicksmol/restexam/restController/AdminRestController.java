@@ -1,4 +1,4 @@
-package com.nicksmol.restexam.RestController;
+package com.nicksmol.restexam.restController;
 
 
 import com.nicksmol.restexam.model.User;

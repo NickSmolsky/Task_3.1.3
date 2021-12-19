@@ -35,6 +35,12 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
+    public User(Long id, Set<Role> roles, String email) {
+        this.id = id;
+        this.roles = roles;
+        this.email = email;
+    }
+
     public User(String username, String lastName, int age, String email) {
         this.username = username;
         this.lastName = lastName;
@@ -101,6 +107,19 @@ public class User implements UserDetails {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                '}';
     }
 
     @Override
